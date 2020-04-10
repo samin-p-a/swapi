@@ -55,8 +55,8 @@ router.add('/api/people/', (ctx, data) => {
   const page = url.searchParams.get('page') || 1
   ctx.body = {
     count: people.length,
-    results: people.slice((page - 1) * 10, page * 10).map((p,i) => {
-      return ({ ...p.fields, url:`https://swapi.co/api/people/${i+1}/`})
+    results: people.slice((page - 1) * 10, page * 10).map((p) => {
+      return ({ ...p.fields, url:`https://swapi.co/api/people/${p.pk}/`})
     })
   }
 })
@@ -64,9 +64,10 @@ router.add('/api/people/:pid/', (ctx, data) => {
   //возвращаем одного человека
   console.log('/api/people/:pid/')
   const id= data.route.params.pid;
+  const finded = people.find((i)=>i.pk==id);
   ctx.body = {
-     ...people[id-1].fields,
-     url:`https://swapi.co/api/people/${id}/`
+     ...finded.fields,
+     url:`https://swapi.co/api/people/${finded.pk}/`
   }
 })
 
@@ -79,8 +80,8 @@ router.add('/api/planets/', (ctx, data) => {
   const page = url.searchParams.get('page') || 1
   ctx.body = {
     count: people.length,
-    results: planets.slice((page - 1) * 10, page * 10).map((p,i) => {
-      return ({ ...p.fields, url:`https://swapi.co/api/planets/${i+1}/`})
+    results: planets.slice((page - 1) * 10, page * 10).map((p) => {
+      return ({ ...p.fields, url:`https://swapi.co/api/planets/${p.pk}/`})
     })
   }
 })
@@ -88,9 +89,10 @@ router.add('/api/planets/:pid/', (ctx, data) => {
   //возвращаем одну планету
   console.log('/api/planets/:pid/')
   const id= data.route.params.pid;
+  const finded = planets.find((i)=>i.pk==id);
   ctx.body = {
-     ...planets[id-1].fields,
-     url:`https://swapi.co/api/planets/${id}/`
+     ...finded.fields,
+     url:`https://swapi.co/api/planets/${finded.pk}/`
   }
 })
 
@@ -103,8 +105,8 @@ router.add('/api/starships/', (ctx, data) => {
   const page = url.searchParams.get('page') || 1
   ctx.body = {
     count: people.length,
-    results: starships.slice((page - 1) * 10, page * 10).map((p,i) => {
-      return ({ ...p.fields, url:`https://swapi.co/api/starships/${i+1}/`})
+    results: starships.slice((page - 1) * 10, page * 10).map((p) => {
+      return ({ ...p.fields, url:`https://swapi.co/api/starships/${p.pk}/`})
     })
   }
 })
@@ -112,9 +114,10 @@ router.add('/api/starships/:pid/', (ctx, data) => {
   //возвращаем однин корабль
   console.log('/api/starships/:pid/')
   const id= data.route.params.pid;
+  const finded = starships.find((i)=>i.pk==id);
   ctx.body = {
-     ...starships[id-1].fields,
-     url:`https://swapi.co/api/starships/${id}/`
+     ...finded.fields,
+     url:`https://swapi.co/api/starships/${finded.pk}/`
   }
 })
 
